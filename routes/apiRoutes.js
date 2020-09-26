@@ -1,31 +1,32 @@
-var notesData = require("../db/db.json");
-var fs = require("fs");
+const notes = require("../db/db.json");
+const fs = require("fs");
+const { v4: uuidv4 } = require('uuid');
 
-module.exports = function(app) {
 
-  app.get("/api/notes", function(req, res) {
-    // fs.readFile('./db/db.json', function (err, data) {
-    //     var notesData = JSON.parse(data.notes)
-        res.send(notesData.notes);
-    // });
-  });
+module.exports = function (app) {
 
-  app.post("/api/notes", function (req, res) {
-    var newNote = {
-        title: req.body.title,
-        text: req.body.text
-    };  
-    notesData.notes.push(newNote);
-
-    json = JSON.stringify(notesData);
-    fs.writeFile("./db/db.json", `${json}`, function (err) {
-        if (err) {
-            return console.log(err);
-        }
+    app.get("/api/notes", function (req, res) {
+        // fs.readFile('./db/db.json', function (err, data) {
+        // var notesData = JSON.parse(notesData)
+        res.send(notes.notes);
+        // });
     });
-    console.log(newNote)
-    res.send(newNote);
-});
+
+    app.post("/api/notes", function (req, res) {
+        var newNote = {
+            id: uuidv4(),
+            title: req.body.title,
+            text: req.body.text
+        };
+        notes.notes.push(newNote);
+        json = JSON.stringify(notes);
+        fs.writeFile("./db/db.json", `${json}`, function (err) {
+            if (err) {
+                return console.log(err);
+            };
+        });
+        res.send(newNote);
+    });
 
 
 };
