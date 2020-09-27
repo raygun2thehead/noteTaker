@@ -29,25 +29,25 @@ module.exports = function (app) {
 
 
 
-    app.delete("api/notes/:id", function (req, res) {
+    app.delete("/api/notes/:id", function (req, res) {
         var delNoteId = req.params.id;
-        db.forEach(obj => {
+        db.forEach((obj) => {
             if(obj.id === delNoteId){
                 var indexObj = db.indexOf(obj);
                 db.splice(indexObj, 1);
             }
         });
         console.log(delNoteId, "line40");
-        // json = JSON.stringify(db);
-        // fs.writeFile("./db/db.json", `${json}`, function (err) {
-        //     if (err) {
-        //         return console.log(err);
-        //     };
-        // });
+        json = JSON.stringify(db);
+        fs.writeFile("./db/db.json", `${json}`, function (err) {
+            if (err) {
+                return console.log(err);
+            };
+        });
      
             
         // }
-        console.log(res.send(db));
+        res.send(db);
         // });
     });
 
