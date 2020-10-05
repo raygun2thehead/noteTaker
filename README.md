@@ -5,6 +5,8 @@
  ### Images
  ![note taker with 5 notes](./images/one.png)
  ![json database with 5 notes](./images/two.png)
+ ### Deployment
+ [Heroku Deployment](https://warm-hollows-19672.herokuapp.com/)
 ## Table of contents 
  - [Installation](#installation) 
  - [Usage](#usage) 
